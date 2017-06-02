@@ -9,9 +9,9 @@ class Asse_Upload {
     }
 
     public function add_timestamp( $upload ) {
-        $pathinfo = pathinfo( $upload );
-
-        return $pathinfo[ 'filename' ] . '_' . time() . '.' . $pathinfo[ 'extension' ];
+        $pathinfo = pathinfo( $upload['name'] );
+        $upload['name'] = $pathinfo[ 'filename' ] . '_' . time() . '.' . $pathinfo[ 'extension' ];
+        return $upload;
     }
 }
 
