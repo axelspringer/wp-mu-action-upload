@@ -1,31 +1,21 @@
 <?php
 
-// @codingStandardsIgnoreFile
-
 use Asse\Plugin\AsseHelpers\HelperFactory;
 
-/**
- * Modifies the file name before the file is moved to its final location.
- *
- * @wp-hook wp_handle_upload_prefilter
- * @param $file
- * @return mixed
- */
-function modifyFileName($file)
-{
-    $file['name'] = HelperFactory::get('file')->addTimestamp($file['name']);
+defined( 'ABSPATH' ) || exit;
 
-    return $file;
-}
-add_action('wp_handle_upload_prefilter', 'modifyFileName');
+class Asse_Upload {
 
-/**
- * Disable usage of year/month folders for uploads.
- *
- * @wp-hook init
- */
-function disableUploadsUseYearmonthFolders()
-{
-    update_option('uploads_use_yearmonth_folders', false);
+    public function __construct() {
+        add_action( 'wp_handle_upload_prefilter', array( $this, 'add_timestamp' ) );
+    }
+
+    public function add_timestamp( $upload ) {
+        $pathinfo = pathinfo( $upload );
+
+        return $pathinfo[ 'filename' ] . '_' . time() . '.' . $pathinfo[ 'extension' ];
+    }
 }
-add_action('init', 'disableUploadsUseYearmonthFolders');
+
+$asse_upload = new Asse_Upload();
+
