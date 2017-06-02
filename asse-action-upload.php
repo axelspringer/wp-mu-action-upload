@@ -1,7 +1,5 @@
 <?php
 
-use Asse\Plugin\AsseHelpers\HelperFactory;
-
 defined( 'ABSPATH' ) || exit;
 
 class Asse_Upload {
