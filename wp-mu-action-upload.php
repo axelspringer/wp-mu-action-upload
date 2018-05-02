@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class Asse_Upload {
+class Axelspringer_Upload {
 
     public function __construct() {
         add_action( 'wp_handle_upload_prefilter', array( $this, 'add_timestamp' ) );
@@ -15,5 +15,5 @@ class Asse_Upload {
     }
 }
 
-$asse_upload = new Asse_Upload();
+$axelspringer_upload = new Axelspringer_Upload();
 
